@@ -1,0 +1,24 @@
+{
+  "name": "check-jspsych",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "jspsych": "jspsych -e experiment",
+    "start": "npm run jspsych -- run",
+    "build": "npm run jspsych -- build",
+    "jatos": "npm run jspsych -- jatos"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "fs": "*",
+    "jspsych": "github:jspsych/jsPsych#v6.3.1"
+  },
+  "devDependencies": {
+    "jspsych-builder": "^2.1.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 9",
+    "ios >= 7"
+  ]
+}
