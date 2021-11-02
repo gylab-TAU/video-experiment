@@ -8,6 +8,7 @@
  * or delete them.
  * @imageDir images
  * @miscDir html
+ * @videoDir videos
  */
 
 // You can import the custom stylesheets you use (.scss or .css).

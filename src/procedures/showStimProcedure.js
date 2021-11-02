@@ -1,4 +1,4 @@
-import * as stimTrial from "../components/imageKeyComponent";
+import * as stimTrial from "../components/videoSliderComponent";
 import "jspsych/jspsych";
 
 export class showStimProcedure {
@@ -13,7 +13,7 @@ export class showStimProcedure {
         let procedure = {
             timeline: [stimTrial.default.getTrial()],
             timeline_variables: this.getTimelineVariables(),
-            randomize_order: true
+            randomize_order: false
         }
 
         return procedure;
@@ -22,12 +22,17 @@ export class showStimProcedure {
     getTimelineVariables() {
         let timelineVariables = [];
 
-        for (let i = 1; i <= this.numOfStims; i++) {
-            let path = "media/images/" + this.stimFolder + "/" + this.stimImageName + i + "." + this.fileExtension;
-            let pathObject = {path: path};
+        for (let i = 0; i < 10; i++) {
+            let path = "media/videos/video.mp4";
+            let variableObject = {
+                path: path,
+                start: i * 60 == 0 ? null : i * 60,
+                stop: (i+1) * 60
+            };
 
-            timelineVariables.push(pathObject);
+            timelineVariables.push(variableObject);
         }
+        console.log(timelineVariables)
 
         return timelineVariables;
     }
