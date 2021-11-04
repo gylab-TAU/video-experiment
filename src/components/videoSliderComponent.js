@@ -14,7 +14,9 @@ class videoSliderComponent {
             require_movement: true,
             start: jsPsych.timelineVariable("start"),
             stop: jsPsych.timelineVariable("stop"),
-            response_allowed_while_playing: false
+            response_allowed_while_playing: false,
+            width: window.screen.availWidth * 0.6,
+            height: window.screen.availHeight * 0.6
         };
 
         return trial;
