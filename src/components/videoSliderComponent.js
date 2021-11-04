@@ -9,7 +9,7 @@ class videoSliderComponent {
             prompt: '<p> some question </p>',
             min: 1,
             max: 10,
-            labels: [1,2,3,4,5,6,7,8,9,10],
+            labels: [1,2,3,4,5,6,7,8,9,10].reverse(),
             slider_start: 6,
             require_movement: true,
             start: jsPsych.timelineVariable("start"),

@@ -2,13 +2,6 @@ import * as stimTrial from "../components/videoSliderComponent";
 import "jspsych/jspsych";
 
 export class showStimProcedure {
-    constructor(stimFolder, stimImageName, numOfStims, fileExtension) {
-        this.stimFolder = stimFolder;
-        this.stimImageName = stimImageName;
-        this.numOfStims = numOfStims;
-        this.fileExtension = fileExtension;
-    }
-
     getProcedure() {
         let procedure = {
             timeline: [stimTrial.default.getTrial()],
@@ -32,7 +25,6 @@ export class showStimProcedure {
 
             timelineVariables.push(variableObject);
         }
-        console.log(timelineVariables)
 
         return timelineVariables;
     }

@@ -26,6 +26,8 @@ import * as id from "./components/idComponent";
 import * as instructions from "./components/instructionsComponent";
 import * as participantDetails from "./components/participantDetailsComponent";
 
+import EgoziService from "./Services/EgoziService";
+
 import { showStimProcedure } from "./procedures/showStimProcedure";
 
 import axios from "axios";
@@ -53,7 +55,7 @@ export function createTimeline(input = {}) {
 
   timeline.push(instructions.default.getTrial());
 
-  timeline.push((new showStimProcedure("stimuli", "stim", 4, "jpg")).getProcedure());
+  timeline.push((new showStimProcedure()).getProcedure());
 
 
   let sendData = {
@@ -63,9 +65,9 @@ export function createTimeline(input = {}) {
 
       let first_trial = jsPsych.data.get().values()[0];
       let participantId = first_trial["participantId"];
-      console.log(participantId)
+      console.log("---- jspsych data ---")
       console.log(jsPsych.data.get().values())
-      sendDataToNutella("Gali", "jspsych-attempt", jsPsych.data.get().values(), participantId);
+      sendDataToNutella("galit", "jspsych-try", jsPsych.data.get().values(), participantId);
      }
   }
 
@@ -89,26 +91,7 @@ function fullScreenChangeHandler() {
 }
 
 function sendDataToNutella(experimenterName, experimentName, data, participantId) {
-  let postObject = {
-    "data": {
-      "participant_info": {
-        "participant_id": participantId,
-      },
-      "time": Date.now(),
-      "headers": ["fake hraders"],
-      "trials": data,
-      "experiment_info": {
-        "experimenter_name": experimenterName,
-        "experiment_name": experimentName
-      },
-      "others": {}
-    }
-  }
-  axios.post("http://178.62.106.190/saveResults/", postObject).then(() => {
-    return true;
-  }).catch(() => {
-    return false;
-  });
+  EgoziService.sendDataToEgozi(experimentName, experimenterName, data, participantId);
 }
 
 export function on_finish() {
