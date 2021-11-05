@@ -19,6 +19,7 @@ import "jspsych/plugins/jspsych-html-keyboard-response";
 import "jspsych/plugins/jspsych-fullscreen";
 import "jspsych/plugins/jspsych-call-function";
 import "jspsych/jspsych";
+import "jspsych/plugins/jspsych-preload";
 
 
 import * as consent from "./components/consentComponent";
@@ -54,6 +55,11 @@ export function createTimeline(input = {}) {
   document.addEventListener("fullscreenchange", fullScreenChangeHandler)
 
   timeline.push(instructions.default.getTrial());
+
+  timeline.push({
+    type: "preload",
+    video: ["/media/videos/video.mp4"]
+  });
 
   timeline.push((new showStimProcedure()).getProcedure());
 

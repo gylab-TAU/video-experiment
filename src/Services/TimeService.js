@@ -16,8 +16,8 @@ class TimeService {
 
             times.push(minutes * 60 + seconds);
         }
-
-        console.log(times)
+        times.sort((a, b) => a-b);
+        console.log(times);
 
         return times;
     }
