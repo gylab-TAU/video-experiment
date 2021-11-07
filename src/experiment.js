@@ -28,6 +28,7 @@ import * as instructions from "./components/instructionsComponent";
 import * as participantDetails from "./components/participantDetailsComponent";
 
 import EgoziService from "./Services/EgoziService";
+import NutellaService from "./Services/NutellaService";
 
 import { showStimProcedure } from "./procedures/showStimProcedure";
 
@@ -58,7 +59,7 @@ export function createTimeline(input = {}) {
 
   timeline.push({
     type: "preload",
-    video: ["/media/videos/video.mp4"]
+    video: ["./media/videos/video.mp4"]
   });
 
   timeline.push((new showStimProcedure()).getProcedure());
@@ -73,7 +74,7 @@ export function createTimeline(input = {}) {
       let participantId = first_trial["participantId"];
       console.log("---- jspsych data ---")
       console.log(jsPsych.data.get().values())
-      sendDataToNutella("galit", "jspsych-try", jsPsych.data.get().values(), participantId);
+      sendData("galit", "jspsych-try", jsPsych.data.get().values(), participantId);
      }
   }
 
@@ -96,7 +97,8 @@ function fullScreenChangeHandler() {
   }
 }
 
-function sendDataToNutella(experimenterName, experimentName, data, participantId) {
+function sendData(experimenterName, experimentName, data, participantId) {
+  NutellaService.sendDataToNutella(experimentName, experimenterName, data, participantId);
   EgoziService.sendDataToEgozi(experimentName, experimenterName, data, participantId);
 }
 
