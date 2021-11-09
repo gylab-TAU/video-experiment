@@ -43,6 +43,17 @@ import axios from "axios";
 export function createTimeline(input = {}) {
   let timeline = [];
 
+  let video_names = ["./media/videos/video.mp4"];
+
+  timeline.push({
+    type: "preload",
+    auto_preload: true,
+    message: "loading...",
+    show_progress_bar: true,
+    show_detailed_errors: true,
+    video: video_names
+  });
+
   timeline.push(id.default.getTrial());
   timeline.push(participantDetails.default.getTrial());
   timeline.push(consent.default.getConsentTrial())
@@ -57,15 +68,10 @@ export function createTimeline(input = {}) {
 
   timeline.push(instructions.default.getTrial());
 
-  timeline.push({
-    type: "preload",
-    video: ["./media/videos/video.mp4"]
-  });
-
-  timeline.push((new showStimProcedure()).getProcedure());
+  timeline.push((new showStimProcedure()).getProcedure(video_names));
 
 
-  let sendData = {
+  let sendDataToServer = {
     type: 'call-function',
     func: () => { 
       document.removeEventListener("fullscreenchange", fullScreenChangeHandler)
@@ -78,7 +84,7 @@ export function createTimeline(input = {}) {
      }
   }
 
-  timeline.push(sendData);
+  timeline.push(sendDataToServer);
 
   let endMessage = {
     type: 'html-keyboard-response',

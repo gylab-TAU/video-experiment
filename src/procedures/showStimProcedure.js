@@ -3,36 +3,28 @@ import "jspsych/jspsych";
 import TimeService from "../Services/TimeService";
 
 export class showStimProcedure {
-    getProcedure() {
+    getProcedure(videos) {
         let procedure = {
-            timeline: [stimTrial.default.getTrial()],
-            timeline_variables: this.getTimelineVariables(),
+            timeline: this.getTrials(videos),
             randomize_order: false
         }
 
         return procedure;
     }
 
-    getTimelineVariables() {
-        let timelineVariables = [];
+    getTrials(videos) {
+        let trials = [];
 
         let times = new TimeService().getStopTimes();
-        
+
         for (let i = 0; i < times.length; i++) {
             let start = i == 0 ? null : times[i - 1];
             let stop = i == times.length ? null : times[i]
-            let path = "media/videos/video.mp4";
-            let variableObject = {
-                path: path,
-                start: start,
-                stop: stop
-            };
+            let trial = stimTrial.default.getTrial(videos, start, stop)
 
-            timelineVariables.push(variableObject);
+            trials.push(trial);
         }
 
-        console.log(timelineVariables)
-
-        return timelineVariables;
+        return trials;
     }
 }
