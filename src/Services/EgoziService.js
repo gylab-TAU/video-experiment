@@ -12,7 +12,6 @@ class EgoziService {
         }
         console.log(data)
         let success = (res) => {
-            console.log(res);
             console.log("egozi succeded");
 
             NutellaService.sendDataToNutella(experimentName, experimenterName, results, participantId)

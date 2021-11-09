@@ -12,12 +12,9 @@ class TimeService {
             let minutes = parseInt(timeString.split(":")[0]);
             let seconds = parseInt(timeString.split(":")[1]);
 
-            console.log(minutes + " : " + seconds)
-
             times.push(minutes * 60 + seconds);
         }
         times.sort((a, b) => a-b);
-        console.log(times);
 
         return times;
     }

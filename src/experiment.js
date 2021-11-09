@@ -29,6 +29,7 @@ import * as participantDetails from "./components/participantDetailsComponent";
 
 import EgoziService from "./Services/EgoziService";
 import NutellaService from "./Services/NutellaService";
+import DataService from "./Services/DataService";
 
 import { showStimProcedure } from "./procedures/showStimProcedure";
 
@@ -75,11 +76,8 @@ export function createTimeline(input = {}) {
     type: 'call-function',
     func: () => { 
       document.removeEventListener("fullscreenchange", fullScreenChangeHandler)
-
       let first_trial = jsPsych.data.get().values()[0];
       let participantId = first_trial["participantId"];
-      console.log("---- jspsych data ---")
-      console.log(jsPsych.data.get().values())
       sendData("galit", "jspsych-try", jsPsych.data.get().values(), participantId);
      }
   }
@@ -104,6 +102,7 @@ function fullScreenChangeHandler() {
 }
 
 function sendData(experimenterName, experimentName, data, participantId) {
+  console.log(DataService.getDataAsArray(jsPsych.data.get()))
   NutellaService.sendDataToNutella(experimentName, experimenterName, data, participantId);
   EgoziService.sendDataToEgozi(experimentName, experimenterName, data, participantId);
 }
