@@ -16,7 +16,11 @@ class videoSliderComponent {
             stop: stop,
             response_allowed_while_playing: false,
             width: window.screen.availWidth * 0.6,
-            height: window.screen.availHeight * 0.6
+            height: window.screen.availHeight * 0.6,
+            on_finish: function(data) {
+                data.start = start;
+                data.stop = stop;
+            }
         };
 
         return trial;
