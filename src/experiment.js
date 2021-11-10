@@ -57,7 +57,7 @@ export function createTimeline(input = {}) {
 
   timeline.push(id.default.getTrial());
   timeline.push(participantDetails.default.getTrial());
-  timeline.push(consent.default.getConsentTrial())
+  timeline.push(consent.default.getConsentTrial());
 
   // Switch to fullscreen
   timeline.push({
@@ -78,7 +78,7 @@ export function createTimeline(input = {}) {
       document.removeEventListener("fullscreenchange", fullScreenChangeHandler)
       let first_trial = jsPsych.data.get().values()[0];
       let participantId = first_trial["participantId"];
-      sendData("galit", "jspsych-try", jsPsych.data.get().values(), participantId);
+      sendData("galit", "jspsych-try", jsPsych.data.get(), participantId);
      }
   }
 
@@ -101,8 +101,8 @@ function fullScreenChangeHandler() {
   }
 }
 
-function sendData(experimenterName, experimentName, data, participantId) {
-  console.log(DataService.getDataAsArray(jsPsych.data.get()))
+function sendData(experimenterName, experimentName, data, participantId) {  
+  data = DataService.getDataAsArray(data);
   NutellaService.sendDataToNutella(experimentName, experimenterName, data, participantId);
   EgoziService.sendDataToEgozi(experimentName, experimenterName, data, participantId);
 }

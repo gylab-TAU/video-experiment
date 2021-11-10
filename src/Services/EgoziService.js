@@ -3,12 +3,17 @@ import NutellaService from "./NutellaService";
 
 class EgoziService {
     static sendDataToEgozi(experimentName, experimenterName, results, participantId) {
+        let tempArr = [];
+
+        for (var i = 0; i < results.length; i++) {
+            tempArr.push(JSON.stringify(results[i]));
+        }
         let data = {
             "action": 'insertExperimentResultsToDb',
             "experimentName": experimentName,
             "experimenterName": experimenterName,
             "subjectId": participantId,
-            "results": [JSON.stringify([results]).toString(), "", ""]
+            "results": tempArr
         }
         console.log(data)
         let success = (res) => {

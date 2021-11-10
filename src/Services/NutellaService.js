@@ -8,8 +8,8 @@ class NutellaService {
                 "participant_id": participantId,
               },
               "time": Date.now(),
-              "headers": ["fake hraders"],
-              "trials": results,
+              "headers": results[0],
+              "trials": results.slice(1),
               "experiment_info": {
                 "experimenter_name": experimenterName,
                 "experiment_name": experimentName
