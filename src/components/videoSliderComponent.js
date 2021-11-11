@@ -17,6 +17,7 @@ class videoSliderComponent {
             response_allowed_while_playing: false,
             width: window.screen.availWidth * 0.6,
             height: window.screen.availHeight * 0.6,
+            hide_slider_while_video_plays: true,
             on_finish: function(data) {
                 data.start = start;
                 data.stop = stop;
