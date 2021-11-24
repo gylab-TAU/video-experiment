@@ -23,13 +23,13 @@ import "jspsych/plugins/jspsych-preload";
 
 
 import * as consent from "./components/consentComponent";
-import * as id from "./components/idComponent";
 import * as instructions from "./components/instructionsComponent";
 import * as participantDetails from "./components/participantDetailsComponent";
 
 import EgoziService from "./Services/EgoziService";
 import NutellaService from "./Services/NutellaService";
 import DataService from "./Services/DataService";
+import IdFromUrlService from "./Services/IdFromUrlService";
 
 import { showStimProcedure } from "./procedures/showStimProcedure";
 
@@ -55,7 +55,17 @@ export function createTimeline(input = {}) {
     video: video_names
   });
 
-  timeline.push(id.default.getTrial());
+  let getParticipantIdFromUrl = {
+    type: 'call-function',
+    func: () => { 
+        let id = IdFromUrlService.getId();
+        let data = {participantId: id}
+        jsPsych.data.get().push(data);
+     }
+  }
+
+  timeline.push(getParticipantIdFromUrl);
+
   timeline.push(participantDetails.default.getTrial());
   timeline.push(consent.default.getConsentTrial());
 
