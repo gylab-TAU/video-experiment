@@ -2,7 +2,7 @@ import "jspsych/plugins/jspsych-video-slider-response";
 
 class videoSliderComponent {
 
-    static getTrial(videos, start, stop) {
+    static getTrial(videos, start, stop, id) {
         let trial = {
             type: "video-slider-response",
             stimulus: videos,
@@ -21,6 +21,7 @@ class videoSliderComponent {
             on_finish: function(data) {
                 data.start = start;
                 data.stop = stop;
+                data.id = id;
             }
         };
 
